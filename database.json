@@ -1,20 +1,20 @@
 {
   "local": {
     "driver": "pg",
-    "host": { "ENV": "HOST" },
+    "host": { "ENV": "PG_HOST" },
     "user": { "ENV": "PG_USER" },
     "password": { "ENV": "PG_PASSWORD" }
   },
   "dev": {
     "driver": "pg",
-    "host": { "ENV": "HOST" },
+    "host": { "ENV": "PG_HOST" },
     "user": { "ENV": "PG_USER" },
     "password": { "ENV": "PG_PASSWORD" },
     "database": { "ENV": "PG_DEV_DB" }
   },
   "test": {
     "driver": "pg",
-    "host": { "ENV": "HOST" },
+    "host": { "ENV": "PG_HOST" },
     "user": { "ENV": "PG_USER" },
     "password": { "ENV": "PG_PASSWORD" },
     "database": { "ENV": "PG_TEST_DB" }

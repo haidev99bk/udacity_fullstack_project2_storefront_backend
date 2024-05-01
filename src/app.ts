@@ -1,8 +1,8 @@
-import express from "express";
-import bodyParser from "body-parser";
 import dotEnv from "dotenv";
 
-dotEnv.config();
+import express from "express";
+import bodyParser from "body-parser";
+import pool from "../utils/database";
 
 const app = express();
 
@@ -11,6 +11,11 @@ const port = 3000;
 // middleware
 
 app.get("/", (req, res) => {
+  try {
+    pool.connect();
+  } catch (err) {
+    console.log("error connecting to database", err);
+  }
   res.send("<h1>Hello</h1>");
 });
 
