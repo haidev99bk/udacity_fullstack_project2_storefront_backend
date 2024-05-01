@@ -29,7 +29,54 @@ export class UserStore {
         hashPassword(password),
       ]);
 
-      return result.rows[0] as UserDB;
+      return result.rows[0];
+    } catch (err) {
+      throw new Error(`Failed to create user: ${err}`);
+    }
+  }
+  async getAll(): Promise<UserDB[]> {
+    try {
+      const sql = "SELECT * FROM users";
+
+      const users = await pool.query(sql);
+      return users.rows;
+    } catch (err) {
+      throw new Error(`Failed to create user: ${err}`);
+    }
+  }
+  async getById(id: string): Promise<UserDB> {
+    try {
+      const sql = "SELECT * FROM users WHERE id=$1";
+
+      const users = await pool.query(sql, [id]);
+      return users.rows[0];
+    } catch (err) {
+      throw new Error(`Failed to create user: ${err}`);
+    }
+  }
+  async deleteUserById(id: string): Promise<UserDB> {
+    try {
+      const sql = "DELETE FROM users WHERE id=$1";
+      const result = await pool.query(sql, [id]);
+
+      return result.rows[0];
+    } catch (err) {
+      throw new Error(`Failed to create user: ${err}`);
+    }
+  }
+  async updateUserById(id: string, user: UserFull): Promise<UserDB> {
+    try {
+      const sql =
+        "UPDATE users SET user_name=$2, first_name=$3, last_name=$4, hashed_password=$5 WHERE id=$1 RETURNING *";
+      const result = await pool.query(sql, [
+        id,
+        user.userName,
+        user.firstName,
+        user.lastName,
+        hashPassword(user.password),
+      ]);
+
+      return result.rows[0];
     } catch (err) {
       throw new Error(`Failed to create user: ${err}`);
     }

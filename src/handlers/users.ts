@@ -1,4 +1,3 @@
-const getUsers = () => {};
 import type { Request, Response } from "express";
 import { UserFull, UserStore } from "../models/user";
 import { generateToken } from "../utils/token";
@@ -18,17 +17,54 @@ const createUser = async (req: Request, res: Response) => {
     const token = generateToken({ firstName, lastName, userName });
     const createdUser = await userStore.create(req.body);
 
-    console.log("createdUser", createdUser);
     res.json(token);
   } catch (err) {
-    console.log("createUser err: ", err);
-    res.status(400).json({ err });
+    res.status(400).send(err);
+  }
+};
+
+const getUsers = async (req: Request, res: Response) => {
+  try {
+    const users = await userStore.getAll();
+    res.json(users);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+};
+
+const getUserId = async (req: Request, res: Response) => {
+  try {
+    const user = await userStore.getById(req.params.id);
+    res.json(user);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+};
+
+const deleteUser = async (req: Request, res: Response) => {
+  try {
+    const user = await userStore.deleteUserById(req.params.id);
+    res.json(user);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+};
+
+const updateUser = async (req: Request, res: Response) => {
+  try {
+    const user = await userStore.updateUserById(req.params.id, req.body);
+    res.json(user);
+  } catch (err) {
+    res.status(400).send(err);
   }
 };
 
 const usersHandlers = {
-  getUsers,
   createUser,
+  getUsers,
+  getUserId,
+  deleteUser,
+  updateUser,
 };
 
 export default usersHandlers;

@@ -3,7 +3,10 @@ import usersHandlers from "../../handlers/users";
 
 const usersRoutes = express.Router();
 
-usersRoutes.get("/", usersHandlers.getUsers);
 usersRoutes.post("/create", usersHandlers.createUser);
+usersRoutes.get("/", usersHandlers.getUsers);
+usersRoutes.get("/:id", usersHandlers.getUserId);
+usersRoutes.delete("/:id", usersHandlers.deleteUser);
+usersRoutes.put("/:id", usersHandlers.updateUser);
 
 export default usersRoutes;
