@@ -59,12 +59,36 @@ const updateUser = async (req: Request, res: Response) => {
   }
 };
 
+const authenticate = async (req: Request, res: Response) => {
+  try {
+    if (!req.body.userName || !req.body.password) {
+      res.status(400).send("Pls provide username and password");
+      return;
+    }
+
+    const user = await userStore.authenticate(
+      req.body.userName,
+      req.body.password
+    );
+
+    if (!user) {
+      res.status(400).send("Password is incorrect");
+      return;
+    }
+
+    res.json(generateToken(user));
+  } catch (err) {
+    res.status(400).send(err);
+  }
+};
+
 const usersHandlers = {
   createUser,
   getUsers,
   getUserId,
   deleteUser,
   updateUser,
+  authenticate,
 };
 
 export default usersHandlers;

@@ -1,5 +1,6 @@
 import pool from "../utils/database";
 import { hashPassword } from "../utils/hashPass";
+import bcrypt from "bcrypt";
 
 export interface UserBase {
   firstName: string;
@@ -77,6 +78,25 @@ export class UserStore {
       ]);
 
       return result.rows[0];
+    } catch (err) {
+      throw new Error(`Failed to create user: ${err}`);
+    }
+  }
+  async authenticate(userName: string, pass: string): Promise<UserDB | null> {
+    try {
+      const sql = "SELECT * from users WHERE user_name=$1";
+      const result = await pool.query(sql, [userName]);
+      const hashedPassword = result.rows[0].hashed_password;
+      const isMatchedPassword = bcrypt.compareSync(
+        pass + process.env.BCRYPT_PEPPER,
+        hashedPassword
+      );
+
+      if (isMatchedPassword) {
+        return result.rows[0];
+      } else {
+        return null;
+      }
     } catch (err) {
       throw new Error(`Failed to create user: ${err}`);
     }

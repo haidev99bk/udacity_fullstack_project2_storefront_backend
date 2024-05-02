@@ -8,5 +8,6 @@ usersRoutes.get("/", usersHandlers.getUsers);
 usersRoutes.get("/:id", usersHandlers.getUserId);
 usersRoutes.delete("/:id", usersHandlers.deleteUser);
 usersRoutes.put("/:id", usersHandlers.updateUser);
+usersRoutes.post("/authenticate", usersHandlers.authenticate);
 
 export default usersRoutes;
