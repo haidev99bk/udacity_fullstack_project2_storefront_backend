@@ -19,7 +19,6 @@ export interface UserDB extends UserFull {
 export class UserStore {
   async create(user: UserFull): Promise<UserDB> {
     const { firstName, lastName, userName, password } = user;
-
     try {
       const sql =
         "INSERT INTO users (first_name, last_name, user_name, hashed_password) VALUES ($1, $2, $3, $4) RETURNING *";
