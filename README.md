@@ -1,5 +1,7 @@
 ## Guide:
 
+Node version: 18.13.0
+
 ### ENV config:
 
 ```
