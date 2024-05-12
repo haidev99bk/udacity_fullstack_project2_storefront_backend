@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 dotenv.config();
 
-export const verifyToken = (
+export const tokenVerifyMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction

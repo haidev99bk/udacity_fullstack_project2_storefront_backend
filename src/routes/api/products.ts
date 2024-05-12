@@ -1,13 +1,17 @@
 import express from "express";
 import productsHandler from "../../handlers/products";
-import { verifyToken } from "../../middlewares/verifyToken";
+import { tokenVerifyMiddleware } from "../../middlewares/tokenVerifyMiddleware";
 
 const productsRoutes = express.Router();
 
 productsRoutes.get("/", productsHandler.getAll);
-productsRoutes.post("/create", verifyToken, productsHandler.create);
+productsRoutes.post("/create", tokenVerifyMiddleware, productsHandler.create);
 productsRoutes.get("/:id", productsHandler.get);
-productsRoutes.delete("/:id", verifyToken, productsHandler.deleteProduct);
-productsRoutes.put("/:id", verifyToken, productsHandler.update);
+productsRoutes.delete(
+  "/:id",
+  tokenVerifyMiddleware,
+  productsHandler.deleteProduct
+);
+productsRoutes.put("/:id", tokenVerifyMiddleware, productsHandler.update);
 
 export default productsRoutes;
