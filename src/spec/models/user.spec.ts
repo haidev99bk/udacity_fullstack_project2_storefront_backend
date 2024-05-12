@@ -1,58 +1,60 @@
-import { UserFull, UserStore } from "../../models/user";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { UserFull, UserStore } from '../../models/user'
 
-const userStore = new UserStore();
+const userStore = new UserStore()
 
 const mockUser: UserFull = {
-  firstName: "Viet",
-  lastName: "Hai",
-  userName: "haidev99bk",
-  password: "haidev99bk@12345",
-};
+  firstName: 'Viet',
+  lastName: 'Hai',
+  userName: 'haidev99bk',
 
-describe("User model", () => {
-  it("should create a new user", async () => {
-    const result = await userStore.create(mockUser);
+  password: 'haidev99bk@12345',
+}
 
-    expect((result as any)?.first_name).toBe("Viet");
-  });
+describe('User model', () => {
+  it('should create a new user', async () => {
+    const result = await userStore.create(mockUser)
 
-  it("should get the user", async () => {
-    const userList = await userStore.getAll();
-    const result = await userStore.getById(userList[0].id.toString());
+    expect((result as any)?.first_name).toBe('Viet')
+  })
 
-    expect((result as any).first_name).toBe("Viet");
-  });
+  it('should get the user', async () => {
+    const userList = await userStore.getAll()
+    const result = await userStore.getById(userList[0].id.toString())
 
-  it("should update the user", async () => {
-    const userList = await userStore.getAll();
+    expect((result as any).first_name).toBe('Viet')
+  })
+
+  it('should update the user', async () => {
+    const userList = await userStore.getAll()
     const result = await userStore.updateUserById(userList[0].id.toString(), {
       ...mockUser,
-      lastName: "Harry",
-    });
+      lastName: 'Harry',
+    })
 
-    expect((result as any)?.last_name).toBe("Harry");
-  });
+    expect((result as any)?.last_name).toBe('Harry')
+  })
 
-  it("should authenticate the user", async () => {
+  it('should authenticate the user', async () => {
     const result = await userStore.authenticate(
       mockUser.userName,
       mockUser.password
-    );
+    )
 
-    expect((result as any).last_name).toBe("Harry");
-  });
+    expect((result as any).last_name).toBe('Harry')
+  })
 
-  it("should get all users", async () => {
-    const result = await userStore.getAll();
+  it('should get all users', async () => {
+    const result = await userStore.getAll()
 
-    expect((result as any).length).toBe(1);
-  });
+    expect((result as any).length).toBe(1)
+  })
 
-  it("should delete user", async () => {
-    const userList = await userStore.getAll();
+  it('should delete user', async () => {
+    const userList = await userStore.getAll()
 
-    const result = await userStore.deleteUserById(userList[0].id.toString());
+    const result = await userStore.deleteUserById(userList[0].id.toString())
 
-    expect((result as any)?.first_name).toBeUndefined();
-  });
-});
+    expect((result as any)?.first_name).toBeUndefined()
+  })
+})

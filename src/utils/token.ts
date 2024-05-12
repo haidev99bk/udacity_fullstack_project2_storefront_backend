@@ -1,9 +1,9 @@
-import { UserBase, UserDB } from "../models/user";
-import jwt from "jsonwebtoken";
-import dotEnv from "dotenv";
+import { UserDB } from '../models/user'
+import jwt from 'jsonwebtoken'
+import dotEnv from 'dotenv'
 
-dotEnv.config();
+dotEnv.config()
 
 export const generateToken = (user: UserDB) => {
-  return jwt.sign(user, process.env.SECRET_KEY as string);
-};
+  return jwt.sign(user, process.env.SECRET_KEY as string)
+}

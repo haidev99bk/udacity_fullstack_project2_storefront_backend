@@ -13,7 +13,9 @@
     "up-migrations:test": "db-migrate up -e test",
     "down-migrations:test": "db-migrate reset -e test",
     "prepare-test": "npm run up-migrations:test && ENV=test  npm run build",
-    "test": "npm run prepare-test && ENV=test jasmine && npm run down-migrations:test"
+    "test": "npm run prepare-test && ENV=test jasmine && npm run down-migrations:test",
+    "lint": "npx eslint . --ext .ts",
+    "prettier": "npx prettier . --write"
   },
   "author": "",
   "license": "ISC",
@@ -29,15 +31,24 @@
     "supertest": "^7.0.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.2.0",
     "@types/bcrypt": "^5.0.2",
     "@types/express": "^4.17.21",
     "@types/jasmine": "^5.1.4",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/pg": "^8.11.5",
     "@types/supertest": "^6.0.2",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
     "dotenv": "^16.4.5",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.2.0",
     "jasmine-spec-reporter": "^7.0.0",
+    "prettier": "^3.2.5",
+    "stylelint-prettier": "^5.0.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.8.0"
   }
 }

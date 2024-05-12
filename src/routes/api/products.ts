@@ -1,17 +1,17 @@
-import express from "express";
-import productsHandler from "../../handlers/products";
-import { tokenVerifyMiddleware } from "../../middlewares/tokenVerifyMiddleware";
+import express from 'express'
+import productsHandler from '../../handlers/products'
+import { tokenVerifyMiddleware } from '../../middlewares/tokenVerifyMiddleware'
 
-const productsRoutes = express.Router();
+const productsRoutes = express.Router()
 
-productsRoutes.get("/", productsHandler.getAll);
-productsRoutes.post("/create", tokenVerifyMiddleware, productsHandler.create);
-productsRoutes.get("/:id", productsHandler.get);
+productsRoutes.get('/', productsHandler.getAll)
+productsRoutes.post('/create', tokenVerifyMiddleware, productsHandler.create)
+productsRoutes.get('/:id', productsHandler.get)
 productsRoutes.delete(
-  "/:id",
+  '/:id',
   tokenVerifyMiddleware,
   productsHandler.deleteProduct
-);
-productsRoutes.put("/:id", tokenVerifyMiddleware, productsHandler.update);
+)
+productsRoutes.put('/:id', tokenVerifyMiddleware, productsHandler.update)
 
-export default productsRoutes;
+export default productsRoutes
