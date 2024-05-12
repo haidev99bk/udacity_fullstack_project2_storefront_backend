@@ -14,8 +14,8 @@ const createUser = async (req: Request, res: Response) => {
   }
 
   try {
-    const token = generateToken({ firstName, lastName, userName });
     const createdUser = await userStore.create(req.body);
+    const token = generateToken(createdUser);
 
     res.json(token);
   } catch (err) {

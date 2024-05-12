@@ -6,7 +6,7 @@ const orderRoutes = express.Router();
 
 orderRoutes.get("/", ordersHandler.getAll);
 orderRoutes.get("/:id", tokenVerifyMiddleware, ordersHandler.getById);
-orderRoutes.post("/:id", tokenVerifyMiddleware, ordersHandler.updateOrder);
+orderRoutes.put("/:id", tokenVerifyMiddleware, ordersHandler.updateOrder);
 orderRoutes.get(
   "/current-orders/:userId",
   tokenVerifyMiddleware,
